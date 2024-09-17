@@ -3,12 +3,11 @@ import tarfile
 import requests
 import hashlib
 from enum import Enum
-from tqdm import tqdm
-
 
 class DownloadableData(str, Enum):
     SAMPLE_DATA = 'triggered_earthquake_sample_data'
     TRIGGERED_EARTHQUAKE = 'triggered_earthquakes'
+    MARS_INSIGHT_SAMPLE = 'mars_insight_sample'
     TRIGGERED_TREMOR_100HZ = 'triggered_tremor'
     TRIGGERED_TREMOR_SAMPLE = 'triggered_tremor_sample'
     TRIGGERED_TREMOR_20HZ = 'triggered_tremor_20hz'
@@ -19,6 +18,8 @@ def downloadable_data_path(downloadable_data):
         return 'https://blainerothrock-public.s3.us-east-2.amazonaws.com/seisml/triggered_earthquake/triggered_earthquake_sample_data.tar.gz'
     if downloadable_data == DownloadableData.TRIGGERED_EARTHQUAKE:
         return 'https://blainerothrock-public.s3.us-east-2.amazonaws.com/seisml/triggered_earthquake/triggered_earthquakes.tar.gz'
+    if downloadable_data == DownloadableData.MARS_INSIGHT_SAMPLE:
+        return 'https://blainerothrock-public.s3.us-east-2.amazonaws.com/seisml/mars/mars_insight_sample.tar.gz'
     if downloadable_data == DownloadableData.TRIGGERED_TREMOR_100HZ:
         return 'https://blainerothrock-public.s3.us-east-2.amazonaws.com/seisml/triggered_tremor/triggered_tremor.tar.gz'
     if downloadable_data == DownloadableData.TRIGGERED_TREMOR_SAMPLE:
@@ -28,14 +29,16 @@ def downloadable_data_path(downloadable_data):
 
 DATA_PATH = os.path.expanduser('~/.seisml/data/')
 
+def download_data(dd):
+    return download_and_verify(dd.value, downloadable_data_path(dd))
 
 def download_and_verify(name, download_path, force=False):
     print('downloading {}: '.format(name))
     if os.path.isdir(DATA_PATH + name) and not force:
-        return
+        return os.path.join(DATA_PATH, name)
     if os.path.isdir(DATA_PATH + name) and force:
-        print('  - removing existing sample_data')
-        shutil.rmtree(DATA_PATH + 'sample_data')
+        print('  - removing existing {}'.format(name))
+        shutil.rmtree(DATA_PATH + name)
 
     url = download_path
     target_path = os.path.join(DATA_PATH, '{}.tar.gz'.format(name))
@@ -63,9 +66,11 @@ def download_and_verify(name, download_path, force=False):
             os.remove(target_path)
             return
 
-        print('  - extracting sample data')
+        print('  - extracting {}'.format(name))
         tf = tarfile.open(target_path, 'r:gz')
         tf.extractall(DATA_PATH)
         tf.close()
         os.remove(target_path)
+
+        return os.path.join(DATA_PATH, name)
 

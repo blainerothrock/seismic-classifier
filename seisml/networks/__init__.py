@@ -1,2 +1,4 @@
 from .dilated_convolutional import DilatedConvolutional
+from .convolutional_autoencoder import ConvAutoEncoder
 from .convnet import ConvNet
+from .fully_connected_autoencoder import FCAutoEncoder

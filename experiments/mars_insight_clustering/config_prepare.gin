@@ -1,0 +1,7 @@
+# prepare
+split_data.raw_dir='~/.seisml/mars/all/raw'
+split_data.save_dir='~/.seisml/mars/all/prepared_12-3_oct01-010/sample'
+split_data.stride=3
+split_data.length=12
+split_data.starttime='2019-10-01T00:00:00'
+split_data.endtime='2019-10-15T00:00:00'

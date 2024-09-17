@@ -16,14 +16,17 @@ Developing a baseline phase detection experiment using work and data from the pa
 ## Active Experiments
 * [Triggered Earthquake Detection](experiments/triggered_earthquake/README.md)
 * [Triggered Tremor Detection](experiments/triggered_tremor/README.md)
+* [Mars Insight Seismic Data Unsupervised Clustering](experiments/mars_insight_clustering/README.md)
 
 ## Supported Models
 * [Deep Convolutional Network](seisml/networks/convnet.py)
 * [Dialated Convolutional Network for Deep Clustering](seisml/networks/dilated_convolutional.py)
+* [Convolutional Auto Encoder](seisml/networks/convolutional_autoencoder.py)
 
 ## Datasets
 * [Triggered Earthquake](experiments/triggered_earthquake)
 * [Triggered Tremor](experiments/triggered_tremor)
+* [Mars Insight](experiments/mars_insight_clustering)
 
 ## Repo Structure
 * `experiments/`
@@ -52,14 +55,14 @@ Developing a baseline phase detection experiment using work and data from the pa
 * `environment.yml`
     - conda environment file for CI and use
     
-    
 ## Installation
 * clone the repository and `cd` to root
 * create a new Anaconda environment
 ```shell script
 conda create env -f environment.yml
 ``` 
-* run a experiments following the `README.md` found in the specific experiment directory. 
+* run a experiments following the `README.md` found in the specific experiment directory.
+
 
 ## Inspiration 
 The inspiration and starting codebase for this model is from the Seismological Research Letters paper 

@@ -57,6 +57,7 @@ class TestDilatedConvolutional:
             _loss.backward()
             opt.step()
 
+
         embedding_b = model(test_data)
         _loss_b = l(embedding_b, test_label.float())
 

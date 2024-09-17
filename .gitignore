@@ -1,10 +1,14 @@
 .DS_Store
+<<<<<<< HEAD
+=======
 
+>>>>>>> master
 .idea/
 _old/
 runs/
 htmlcov/
 models/
+.data/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -136,4 +140,8 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+<<<<<<< HEAD
+/experiments/mars_insight_clustering/unsupervised_clustering/models/
+=======
 /experiments/triggered_tremor/convnet/runs/
+>>>>>>> master
